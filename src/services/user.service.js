@@ -27,7 +27,15 @@ const create = async (user) => {
   return response;
 };
 
+const getAll = async () => {
+  const response = await User.findAll({
+    attributes: { exclude: ['password'] },
+  });
+  return response;
+};
+
 module.exports = {
   findByEmail,
   create,
+  getAll,
 };
