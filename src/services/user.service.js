@@ -34,8 +34,16 @@ const getAll = async () => {
   return response;
 };
 
+const findById = async (id) => {
+  const response = await User.findByPk(id, {
+    attributes: { exclude: ['password'] },
+  });
+  return response;
+};
+
 module.exports = {
   findByEmail,
   create,
   getAll,
+  findById,
 };
