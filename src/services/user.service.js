@@ -6,7 +6,6 @@ const findByEmail = async (email) => {
       email,
     },
   });
-  console.log(response);
   return response;
 };
 
