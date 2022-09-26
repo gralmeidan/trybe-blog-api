@@ -7,5 +7,6 @@ const postRouter = Router();
 postRouter.use(validateToken);
 
 postRouter.post('/', postController.create);
+postRouter.get('/', postController.getAll);
 
 module.exports = postRouter;
