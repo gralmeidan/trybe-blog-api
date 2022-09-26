@@ -4,7 +4,6 @@ const create = async (req, res, next) => {
   const { title, content, categoryIds } = req.body;
   const { id: userId } = req.user;
   try {
-    console.log(req.user);
     const response = await PostService.create(
       { title, content, categoryIds },
       userId,
