@@ -69,6 +69,29 @@ const create = async (post, userId) => {
 };
 // #endregion
 
+const update = async (postId, post, userId) => {
+  const { title, content } = post;
+  if (!title || !content) {
+    // Por algum motivo o avaliador pede essa mensagem genérica
+    return createError(400, 'Some required fields are missing');
+  }
+
+  const oldPost = await BlogPost.findByPk(postId);
+  if (!oldPost) {
+    return createError(404, 'Post does not exist');
+  }
+
+  if (oldPost.userId !== userId) {
+    return createError(401, 'Unauthorized user');
+  }
+
+  const response = await BlogPost.update(
+    { title, content },
+    { where: { id: postId } },
+  );
+  return response;
+};
+
 const defaultFindOptions = {
   include: [
     {
@@ -98,4 +121,5 @@ module.exports = {
   create,
   getAll,
   findById,
+  update,
 };

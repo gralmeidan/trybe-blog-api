@@ -47,8 +47,33 @@ const findById = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  const { id: postId } = req.params;
+  const { title, content } = req.body;
+  const { id: userId } = req.user;
+
+  try {
+    const affectedRows = await PostService.update(
+      postId,
+      { title, content },
+      userId,
+    );
+
+    if (affectedRows.error) {
+      return next(affectedRows.error);
+    }
+
+    const response = await PostService.findById(userId);
+
+    res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   create,
   getAll,
   findById,
+  update,
 };
