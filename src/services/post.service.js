@@ -92,6 +92,20 @@ const update = async (postId, post, userId) => {
   return response;
 };
 
+const remove = async (id, userId) => {
+  const oldPost = await BlogPost.findByPk(id);
+  if (!oldPost) {
+    return createError(404, 'Post does not exist');
+  }
+
+  if (oldPost.userId !== userId) {
+    return createError(401, 'Unauthorized user');
+  }
+
+  const response = await BlogPost.destroy({ where: { id } });
+  return response;
+};
+
 const defaultFindOptions = {
   include: [
     {
@@ -122,4 +136,5 @@ module.exports = {
   getAll,
   findById,
   update,
+  remove,
 };

@@ -71,9 +71,29 @@ const update = async (req, res, next) => {
   }
 };
 
+const remove = async (req, res, next) => {
+  const { id: postId } = req.params;
+  const { id: userId } = req.user;
+
+  try {
+    const affectedRows = await PostService.remove(postId, userId);
+
+    if (affectedRows.error) {
+      return next(affectedRows.error);
+    }
+
+    await PostService.findById(userId);
+
+    res.status(204).send();
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   create,
   getAll,
   findById,
   update,
+  remove,
 };
