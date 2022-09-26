@@ -9,6 +9,8 @@ postRouter.use(validateToken);
 postRouter.post('/', postController.create);
 postRouter.get('/', postController.getAll);
 
+postRouter.get('/search', postController.filterByText);
+
 postRouter.get('/:id', postController.findById);
 postRouter.put('/:id', postController.update);
 postRouter.delete('/:id', postController.remove);

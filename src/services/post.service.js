@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const {
   sequelize,
   BlogPost,
@@ -131,10 +132,25 @@ const findById = async (id) => {
   return response;
 };
 
+const filterByText = async (q) => {
+  const query = q || '%';
+  const response = await BlogPost.findAll({
+    ...defaultFindOptions,
+    where: {
+      [Op.or]: [
+        { content: { [Op.like]: query } },
+        { title: { [Op.like]: query } },
+      ],
+    },
+  });
+  return response;
+};
+
 module.exports = {
   create,
   getAll,
   findById,
   update,
   remove,
+  filterByText,
 };

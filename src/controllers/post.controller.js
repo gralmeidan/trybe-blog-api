@@ -90,10 +90,21 @@ const remove = async (req, res, next) => {
   }
 };
 
+const filterByText = async (req, res, next) => {
+  const { q } = req.query;
+  try {
+    const response = await PostService.filterByText(q);
+    res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   create,
   getAll,
   findById,
   update,
   remove,
+  filterByText,
 };
