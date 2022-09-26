@@ -8,6 +8,7 @@ const {
 const { postSchema } = require('./validation/schemas');
 const createError = require('./utils/createError');
 
+// #region 'create' method
 const insertRelationships = async (
   categoryIds,
   postId,
@@ -66,26 +67,35 @@ const create = async (post, userId) => {
     return { error };
   }
 };
+// #endregion
+
+const defaultFindOptions = {
+  include: [
+    {
+      model: Category,
+      as: 'categories',
+      through: { attributes: [] },
+    },
+    {
+      model: User,
+      as: 'user',
+      attributes: { exclude: ['password'] },
+    },
+  ],
+};
 
 const getAll = async () => {
-  const response = await BlogPost.findAll({
-    include: [
-      {
-        model: Category,
-        as: 'categories',
-        through: { attributes: [] },
-      },
-      {
-        model: User,
-        as: 'user',
-        attributes: { exclude: ['password'] },
-      },
-    ],
-  });
+  const response = await BlogPost.findAll(defaultFindOptions);
+  return response;
+};
+
+const findById = async (id) => {
+  const response = await BlogPost.findByPk(id, defaultFindOptions);
   return response;
 };
 
 module.exports = {
   create,
   getAll,
+  findById,
 };

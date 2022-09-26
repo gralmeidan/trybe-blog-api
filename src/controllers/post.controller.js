@@ -29,7 +29,26 @@ const getAll = async (_req, res, next) => {
   }
 };
 
+const findById = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const response = await PostService.findById(id);
+
+    if (!response) {
+      return next({
+        statusCode: 404,
+        message: 'Post does not exist',
+      });
+    }
+
+    res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   create,
   getAll,
+  findById,
 };
