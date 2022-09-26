@@ -9,6 +9,7 @@ userRouter.post('/', userController.create);
 userRouter.use(validateToken);
 
 userRouter.get('/', userController.getAll);
+userRouter.delete('/me', userController.removeSelf);
 userRouter.get('/:id', userController.findById);
 
 module.exports = userRouter;

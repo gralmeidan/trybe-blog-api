@@ -41,9 +41,17 @@ const findById = async (id) => {
   return response;
 };
 
+const remove = async (id) => {
+  const response = await User.destroy({
+    where: { id },
+  });
+  return response;
+};
+
 module.exports = {
   findByEmail,
   create,
   getAll,
   findById,
+  remove,
 };

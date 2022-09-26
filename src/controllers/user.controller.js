@@ -49,8 +49,26 @@ const findById = async (req, res, next) => {
   }
 };
 
+const removeSelf = async (req, res, next) => {
+  const { id } = req.user;
+  try {
+    const response = await UserService.remove(id);
+
+    if (!response) {
+      return next({
+        statusCode: 404,
+        message: 'User does not exist',
+      });
+    }
+    res.status(204).send();
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   create,
   getAll,
   findById,
+  removeSelf,
 };
