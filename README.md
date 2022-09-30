@@ -4,10 +4,11 @@ Esse é um dos projetos que eu desenvolvi no módulo de Back-End da Trybe, e con
 
 ## Rodando o código.
 
-Clone o repositório com:
+Clone o repositório e entre na pasta com:
 
 ```bash
 $ git clone https://github.com/gralmeidan/trybe-blog-api.git
+$ cd trybe-blog-api
 ```
 
 Suba os contâineres da aplicação com:
