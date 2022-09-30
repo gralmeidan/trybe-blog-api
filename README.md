@@ -91,36 +91,6 @@ Recebe um body com as informações de um usuário e os registra em um banco de 
   
 </details>
 
-### POST /user
-
-Recebe um body com as informações de um usuário e os registra em um banco de dados e caso o usuário seja criado com sucesso retorna um token. Requer um token de autenticação no campo Authorization do Header.
-
-<details>
-  <summary>Exemplo de corpo de requisição:</summary>
-  
-  ```json
-{
-  "displayName": "Brett Wiltshire",
-  "email": "brett@email.com",
-  "password": "123456",
-  "image": "http://4.bp.blogspot.com/_YA50adQ-7vQ/S1gfR_6ufpI/AAAAAAAAAAk/1ErJGgRWZDg/S45/brett.png"
-  // a imagem não é obrigatória
-}
-  ```
-  
-</details>
-
-<details>
-  <summary>Exemplo de resposta:</summary>
-  
-  ```json
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjo1LCJkaXNwbGF5TmFtZSI6InVzdWFyaW8gZGUgdGVzdGUiLCJlbWFpbCI6InRlc3RlQGVtYWlsLmNvbSIsImltYWdlIjoibnVsbCJ9LCJpYXQiOjE2MjAyNDQxODcsImV4cCI6MTYyMDY3NjE4N30.Roc4byj6mYakYqd9LTCozU1hd9k_Vw5IWKGL4hcCVG8"
-}
-  ```
-  
-</details>
-
 ### GET /user
 
 Retorna uma lista com todos os usuários registrados no banco de dados. Requer um token de autenticação no campo Authorization do Header.
