@@ -273,7 +273,8 @@ Retorna um post registrado no banco de dados. Requer um token de autenticação 
           "name": "Inovação"
       }
   ]
-}  ```
+}  
+```
   
 </details>
 
